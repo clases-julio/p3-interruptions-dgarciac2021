@@ -39,7 +39,7 @@ for led in leds:
 
 This means that we can iterate over a list of GPIO's to use them on whatever function we need, like setting up [pull up resistors](https://github.com/clases-julio/p3-interruptions-dgarciac2021/wiki/Pull-Up-Down) on each pin or the GPIO mode.
 
-We noticed that [e2](./src/e2/sinInterrupcionesMejorado.py) actually works as a normally wired LED throughout a push button. Sure we could not modify its behaviour with just a few keystrokes, but maybe sometimes is easier to use the K.I.S.S.[^2] procedure! Which should be a *mantra* in our engineers life, BTW.
+We noticed that [`sinInterrupcionesMejorado.py`](./src/e2/sinInterrupcionesMejorado.py) actually works as a normally wired LED throughout a push button. Sure we could not modify its behaviour with just a few keystrokes, but maybe sometimes is easier to use the K.I.S.S.[^2] method! Which should be a *mantra* in our engineers life, BTW.
 
 ## Circuit testing
 
