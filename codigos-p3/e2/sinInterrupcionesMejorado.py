@@ -1,31 +1,46 @@
 #!/usr/bin/env python3
 
+import signal
 import time
 import RPi.GPIO as GPIO
 
-pulsadorGPIO = 16
+button1 = 16
+button2 = 20
+
+led1 = 27
+led2 = 17
+
+def driveLed(led, state):
+    GPIO.output(led, state)
+    return None
+
+def checkButton(button):
+    return GPIO.input(button)
+
 
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
 
-    # Activamos resistencia pull_up_down en modo HIGH, esto es:
-    # - HIGH: estado por defecto del GPIO (no se ha pulsado).
-    # - LOW: estado del GPIO cuando se ha pulsado el boton.
-    GPIO.setup(pulsadorGPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    buttons = [button1, button2]
+    leds = [led1, led2]
 
-    pulsado = False
+    for button in buttons:
+        GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    for led in leds:
+        GPIO.setup(led, GPIO.OUT)
 
     while True:
-        if not GPIO.input(pulsadorGPIO): # la lectura siempre da 1 (HIGH/True) excepto al pulsar,
-                                         # y solo en ese instante, que da 0 (LOW/False)
-            if not pulsado: # con esta variable evitamos considerar más de una vez una pulsación;
-                            # puede que se lea +1 vez el estado del pin antes de cambiar su estado
-                            # Este fenómeno se conoce como rebote (o bounce). Algunas funciones
-                            # permiten establecer un parámetro denominado "bouncetime"
-                print("El boton se ha pulsado")
-                pulsado = True
-        else:
-            pulsado = False
+        # bouncetime and timeout are both parameters of wait_for_edge.
+        #
+        # bouncetime means the time which the state of the channel should not change
+        # to consider it as a valid change.
+        #
+        # timeout is the time which the program will wait for the input. If not detected, 
+        # the program will continue.
+        for button in buttons:
+             index = buttons.index(button)
+             led = leds[index]
+             driveLed(led, not checkButton(button))
 
-        time.sleep(0.1) # si pulsamos rápida/ veremos que algunas se escapan...
-
+        # 'None' is the data type that wait_for_edge returns when a timeout is stablished and no
+        # change in the channel is detected.
