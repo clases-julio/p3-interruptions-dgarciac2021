@@ -16,7 +16,14 @@ And this is the real circuit!
 
 We would like to highlight some remarkable aspects from our code.
 
-In [e1](./src/e1/interrupcionEdgeBueno.py), we found that there is more parameters for `GPIO.wait_for_edge` that we saw in the exercise guide. More on them [here](https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/). More precisely, we focused on `timeout`, which is a parameter that sets the time which the `GPIO.wait_for_edge` *will actually wait for that edge*. This turned out to be very handy to solve a lot of problems with our code.
+In [e1](./src/e1/interrupcionEdgeBueno.py), we found that there is more parameters for `GPIO.wait_for_edge` that we saw in the exercise guide. More on them [here](https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/). More precisely, we focused on `timeout`, which is a parameter that sets the time which the `GPIO.wait_for_edge` *will actually wait for that edge*. If that time expires, a `None` is returned, whereas an edge is detected on time, any number is returned. 
+
+```python
+state = GPIO.wait_for_edge(pulsadorGPIO, GPIO.RISING, bouncetime=50, timeout=100)
+if state is not None: print("El boton se ha pulsado")
+```
+
+This turned out to be very handy to solve a lot of problems with our code.
 
 ## Circuit testing
 
