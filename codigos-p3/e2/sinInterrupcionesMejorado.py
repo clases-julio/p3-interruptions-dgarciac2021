@@ -17,7 +17,6 @@ def driveLed(led, state):
 def checkButton(button):
     return GPIO.input(button)
 
-
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
 
@@ -29,18 +28,13 @@ if __name__ == '__main__':
     for led in leds:
         GPIO.setup(led, GPIO.OUT)
 
+    # Scalable code. With those loops we assign the same behavior to all the components in the same line.
+
     while True:
-        # bouncetime and timeout are both parameters of wait_for_edge.
-        #
-        # bouncetime means the time which the state of the channel should not change
-        # to consider it as a valid change.
-        #
-        # timeout is the time which the program will wait for the input. If not detected, 
-        # the program will continue.
         for button in buttons:
              index = buttons.index(button)
              led = leds[index]
-             driveLed(led, not checkButton(button))
+             # both lists follow concordance between the led and the button that controls it.
+             # so the index of the button in the buttons list is the same index of the led.
+             driveLed(led, not checkButton(button)) # Inverted Logic
 
-        # 'None' is the data type that wait_for_edge returns when a timeout is stablished and no
-        # change in the channel is detected.
