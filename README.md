@@ -4,7 +4,7 @@ This exercise consists on drive two [LED's](https://github.com/clases-julio/p1-i
 
 ## Circuit Assembly
 
-This time the assembly gets a little bit more complex. We are using two buttons, two LED's and two 220Ω resistors.
+This time the assembly gets a little bit more complex. We are using two buttons, two LED's and two 220Ω[^1] resistors.
 
 This is an schematic made with [Fritzing](https://fritzing.org/):
 
@@ -19,3 +19,5 @@ We would like to highlight some remarkable aspects from our code.
 ## Circuit testing
 
 This is the result! Pretty nice, isn't it?
+
+[^1]: As we saw in previous exercises, this resistor value might be too high for the 3V3 that the RPI GPIO provides. The only issue is that the LED's will be dimmer.
