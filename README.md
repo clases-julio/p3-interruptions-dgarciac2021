@@ -18,7 +18,7 @@ We would like to highlight some remarkable aspects from our code.
 
 In [e1](./src/e1/interrupcionEdgeBueno.py), we found that there is more parameters for `GPIO.wait_for_edge` that we saw in the exercise guide. More on them [here](https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/). More precisely, we focused on `timeout`, which is a parameter that sets the time (in ms) which the `GPIO.wait_for_edge` *will actually wait for that edge*. If that time expires, a `None` is returned, whereas an edge is detected on time, any number is returned.
 
-```python
+```python3
 state = GPIO.wait_for_edge(pulsadorGPIO, GPIO.RISING, bouncetime=50, timeout=100)
 if state is not None: print("El boton se ha pulsado")
 ```
@@ -27,7 +27,7 @@ This turned out to be very handy to solve a lot of problems with our code.
 
 Secondly, for [e2](./src/e2), we took advantage of [python lists](https://www.w3schools.com/python/python_lists.asp) behaviour in order to make an scalable code. Enssentially, [GPIO](https://github.com/clases-julio/p1-introrpi-pwm-dgarciac2021/wiki/GPIO) ports in a `python` script are just numbers, thus we can operate with them.
 
-```python
+```python3
 buttons = [button1, button2]
 leds = [led1, led2]
 
@@ -51,9 +51,27 @@ def driveLed(led, state):
 driveLed(led, not checkButton(button)) # Inverted Logic
 ```
 
+[`InterrupcionEdgeMejorado.py`](./src/e2/InterrupcionEdgeMejorado.py) was the most difficult implementation since the program will actually wait without doing nothing else. Fortunately for us, we discover the `timeout` parameter.
+
+After tweaking the `timeout` parameter along with a `time.sleep` needed to catch the `KeyboardInterrupt` event, we concluded that a value of 75-100ms for the first and 0.05-0.1ms for the second is the most suitable for this application. However this procedure is not the best and some presses might be missed.
+
+The main problem is, ironically, also the `timeout` parameter. With this implementation the program waits for 75-100ms + 0.05-0.1ms **for each button/led**. With more of this componentes added to the circuit, this program would not be viable. 
+
+Finally, in [`InterrupcionEventMejorado.py`](./src/e2/InterrupcionEventMejorado.py) we found that the argument that the `callbackFunction` takes is actually the GPIO number where the event was detected. Awesome!
+
+Based on that, we can easily drive the correct LED on every event detected. We also added a loop to set up all events on each GPIO.
+
+```python3
+for button in buttons:
+    GPIO.add_event_detect(button, GPIO.BOTH, callback=callbackButton, bouncetime=100)
+
+```
+
 ## Circuit testing
 
 This is the result! Pretty nice, isn't it?
+
+Actually, the behaviour is the same in all the implementations.
 
 [^1]: As we saw in previous exercises, this resistor value might be too high for the 3V3 that the RPI GPIO provides. The only issue is that the LED's will be dimmer.
 [^2]: **K**eep **I**t **S**imple, **S**tupid!*

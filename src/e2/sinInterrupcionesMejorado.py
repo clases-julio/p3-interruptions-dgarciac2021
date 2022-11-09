@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import signal
-import time
 import RPi.GPIO as GPIO
 
 button1 = 16
