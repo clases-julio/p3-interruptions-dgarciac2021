@@ -16,6 +16,8 @@ And this is the real circuit!
 
 We would like to highlight some remarkable aspects from our code.
 
+In [e1](./src/e1/interrupcionEdgeBueno.py), we found that there is more parameters for `GPIO.wait_for_edge`. More on them [here](https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/).
+
 ## Circuit testing
 
 This is the result! Pretty nice, isn't it?
