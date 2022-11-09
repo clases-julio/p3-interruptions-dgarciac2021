@@ -12,8 +12,6 @@ This is an schematic made with [Fritzing](https://fritzing.org/):
 
 And this is the real circuit!
 
-#![Aerial view](./doc/img/*****)
-
 ## Code
 
 We would like to highlight some remarkable aspects from our code.
@@ -21,6 +19,3 @@ We would like to highlight some remarkable aspects from our code.
 ## Circuit testing
 
 This is the result! Pretty nice, isn't it?
-
-#![Circuit testing](./doc/img/********)
-
