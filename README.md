@@ -79,6 +79,8 @@ for button in buttons:
 
 This is the result! Pretty nice, isn't it?
 
+![Circuit test](./doc/img/circuit-test.gif)
+
 Actually, the behaviour is the same in all the implementations.
 
 [^1]: As we saw in previous exercises, this resistor value might be too high for the 3V3 that the RPI GPIO provides. The only issue is that the LED's will be dimmer.
