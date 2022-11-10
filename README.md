@@ -12,6 +12,14 @@ This is an schematic made with [Fritzing](https://fritzing.org/):
 
 And this is the real circuit!
 
+### e1
+
+![e1 aerial view](./doc/img/e1-aerial-view.jpg)
+
+### e2
+
+![e2 aerial view](./doc/img/e2-aerial-view.jpg)
+
 ## Code
 
 We would like to highlight some remarkable aspects from our code.
